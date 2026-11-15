@@ -1093,6 +1093,122 @@ country_event = {
 			factor = 0
 		}
 	}
+	option = {
+		trigger = {
+			any_state = {
+				OR = {
+					state = 190
+					state = 810
+				}
+				CONTROLLER = {
+					OR = {
+						tag = ROOT
+						is_subject_of = ROOT
+						is_in_faction_with = ROOT
+					}
+				}
+			}
+		}
+		name = rcw_bfk.18.c
+		add_political_power = 50
+		add_opinion_modifier = { target = NWA modifier = white_no_accept_LAT }
+		add_opinion_modifier = { target = RSS modifier = white_no_accept_LAT }
+		add_opinion_modifier = { target = RVA modifier = white_no_accept_LAT }
+		WVA = { change_tag_from = LAT }
+		hidden_effect = {
+			WVA = {
+				inherit_technology = LAT
+				every_state = {
+					limit = {
+						OR = {
+							state = 190
+							state = 810
+						}
+						CONTROLLER = {
+							OR = {
+								tag = ROOT
+								is_subject_of = ROOT
+								is_in_faction_with = ROOT
+							}
+						}
+					}
+					WVA = { transfer_state = PREV }
+				}
+				every_state = {
+					limit = {
+						OR = {
+							is_core_of = EST
+							is_core_of = LAT
+							is_core_of = LIT
+						}
+					}
+					add_core_of = WVA
+				}
+				add_ideas = neutral_foreign_policy_law
+				division_template = {
+					name = "Pekhotnyy polk"
+					regiments = {
+						infantry = { x = 0 y = 0 }
+						infantry = { x = 0 y = 1 }
+					}
+					support = {
+						artillery = { x = 0 y = 0 }
+					}
+					priority = 1
+					is_locked = yes
+				}
+				190 = {
+					create_unit = {
+						division = "name = \"I Pekhotnyy polk\" division_template = \"Pekhotnyy polk\" start_experience_factor = 0.7 start_equipment_factor = 1 start_manpower_factor = 1"
+						owner = WVA
+						allow_spawning_on_enemy_provs = yes
+					}
+					create_unit = {
+						division = "name = \"II Pekhotnyy polk\" division_template = \"Pekhotnyy polk\" start_experience_factor = 0.7 start_equipment_factor = 1 start_manpower_factor = 1"
+						owner = WVA
+						allow_spawning_on_enemy_provs = yes
+					}
+					create_unit = {
+						division = "name = \"III Pekhotnyy polk\" division_template = \"Pekhotnyy polk\" start_experience_factor = 0.7 start_equipment_factor = 1 start_manpower_factor = 1"
+						owner = WVA
+						allow_spawning_on_enemy_provs = yes
+					}
+				}
+				declare_war_on = {
+					target = LAT
+					type = annex_everything
+				}
+				every_country = {
+					limit = {
+						has_war_with = LAT
+						NOT = { tag = NWA tag = EST tag = LIT tag = POL }
+					}
+					PREV = {
+						declare_war_on = {
+							target = PREV
+							type = annex_everything
+						}
+					}
+				}
+				if = {
+					limit = { EST = { NOT = { has_war_with = ROOT has_war_with = WVA } is_subject = no } }
+					EST = { country_event = { id = rcw_bfk.10 days = 1 } }
+				}
+				hidden_effect = {
+					every_country = {
+						limit = {
+							NOT = {
+								tag = PREV
+								is_any_former_russian_empire_country = yes
+								former_russian_empire_baltic_states_country = yes tag = HRB
+							}
+						}
+						set_THIS_country_non_recognize_PREV = yes
+					}
+				}
+			}
+		}
+	}
 }
 
 # ЗДА идёт на восток
