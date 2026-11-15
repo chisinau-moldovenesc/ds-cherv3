@@ -169,7 +169,7 @@ country_event = {
 	fire_only_once = yes
 	
 	option = {
-		name = rcw_bfk.6.a
+		name = rcw_bfk.7.a
 		add_ideas = service_by_requirement
 		load_oob = EST_1918
 	}
