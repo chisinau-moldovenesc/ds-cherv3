@@ -3985,7 +3985,7 @@ country_event = {
 	
 	# Играть за Балтику (смэрт)
 	option = {
-		name = rcw_bfk.1918.b
+		name = rcw_bfk.1918.с
 		if = {
 			limit = { OR = { country_exists = LIT owns_state = 11 owns_state = 189 owns_state = 814 owns_state = 784 owns_state = 815 } }
 			every_state = {
